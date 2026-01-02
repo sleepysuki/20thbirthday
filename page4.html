@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Birthday Story - Age 2</title>
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffe4ec, #e8f5e9);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  font-size: 14px;
+  animation: float 6s linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* Main card */
+.card {
+  background: rgba(255,255,255,0.85);
+  padding: 40px;
+  border-radius: 25px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  max-width: 400px;
+  animation: fadeIn 2s ease;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Buttons */
+button {
+  margin: 10px;
+  padding: 12px 30px;
+  font-size: 1em;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #ff5e8e, #ff9aa2);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+}
+button:hover { transform: scale(1.05); }
+
+img {
+  width: 100%;
+  border-radius: 15px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+/* Running poop emojis */
+.poop {
+  position: absolute;
+  font-size: 24px;
+  animation-name: runPoop;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes runPoop {
+  0% { left: -50px; }
+  100% { left: 100vw; }
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h1>Age 2 🎉</h1>
+  <p>Hey look, I found your photo! 📸</p>
+  <img src="her-photo.jpg" alt="Her photo">
+  <p><strong>[Type her Age 2 special message here]</strong></p>
+
+  <!-- Buttons -->
+  <button onclick="location.href='page3.html'">Go Back ⬅️</button>
+  <button onclick="location.href='page5.html'">Next ➡️</button>
+</div>
+
+<script>
+// Floating hearts
+const colors = ["#ffb6c1", "#ff69b4", "#ffffff", "#a8d5ba"];
+for (let i = 0; i < 30; i++) {
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+  heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+  document.body.appendChild(heart);
+}
+
+// Fat cat in corner
+const cat = document.createElement("img");
+cat.src = "fat-cat.png"; // replace with your cat image
+cat.style.position = "fixed";
+cat.style.bottom = "20px";
+cat.style.right = "20px";
+cat.style.width = "120px";
+cat.style.transition = "all 0.5s ease";
+document.body.appendChild(cat);
+
+// Cat hides/moves when mouse comes near
+document.addEventListener("mousemove", (e) => {
+  const mouseX = e.clientX;
+  const mouseY = e.clientY;
+
+  const catRect = cat.getBoundingClientRect();
+  const catX = catRect.left + catRect.width / 2;
+  const catY = catRect.top + catRect.height / 2;
+
+  const distance = Math.hypot(mouseX - catX, mouseY - catY);
+
+  if (distance < 100) {
+    cat.style.bottom = Math.random() * 100 + "px";
+    cat.style.right = Math.random() * 100 + "px";
+  }
+});
+
+// Add running poop emojis
+for (let i = 0; i < 5; i++) {
+  let poop = document.createElement("div");
+  poop.className = "poop";
+  poop.innerHTML = "💩";
+  poop.style.top = Math.random() * 80 + "vh";
+  poop.style.animationDuration = (4 + Math.random() * 3) + "s";
+  document.body.appendChild(poop);
+}
+</script>
+
+</body>
+</html>
