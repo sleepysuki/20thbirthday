@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Birthday Story - Age 3</title>
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffe4ec, #e8f5e9);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  font-size: 14px;
+  animation: float 6s linear infinite;
+  opacity: 0.7;
+}
+@keyframes float {
+  0% { transform: translateY(100vh); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* Main card */
+.card {
+  background: rgba(255,255,255,0.85);
+  padding: 40px;
+  border-radius: 25px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  max-width: 400px;
+  animation: fadeIn 2s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+button {
+  margin: 10px;
+  padding: 12px 30px;
+  font-size: 1em;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #ff5e8e, #ff9aa2);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+}
+button:hover { transform: scale(1.05); }
+
+/* Teeth falling */
+.tooth {
+  position: absolute;
+  font-size: 24px;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes fall {
+  0% { top: -50px; opacity: 0; }
+  50% { opacity: 1; }
+  100% { top: 100vh; opacity: 0; }
+}
+
+/* Kid running */
+.kid {
+  position: absolute;
+  font-size: 30px;
+  transition: all 0.5s ease;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h1>Age 3 🎉</h1>
+  <p><strong>[Type her Age 3 special message here]</strong></p>
+  <button onclick="location.href='page4.html'">Go Back ⬅️</button>
+  <button onclick="location.href='page6.html'">Next ➡️</button>
+</div>
+
+<script>
+// Floating hearts
+const colors = ["#ffb6c1", "#ff69b4", "#ffffff", "#a8d5ba"];
+for (let i = 0; i < 30; i++) {
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+  heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+  document.body.appendChild(heart);
+}
+
+// Fat cat in corner
+const cat = document.createElement("img");
+cat.src = "fat-cat.png"; // replace with your cat image
+cat.style.position = "fixed";
+cat.style.bottom = "20px";
+cat.style.right = "20px";
+cat.style.width = "120px";
+cat.style.transition = "all 0.5s ease";
+document.body.appendChild(cat);
+document.addEventListener("mousemove", (e) => {
+  const mouseX = e.clientX;
+  const mouseY = e.clientY;
+  const catRect = cat.getBoundingClientRect();
+  const catX = catRect.left + catRect.width / 2;
+  const catY = catRect.top + catRect.height / 2;
+  const distance = Math.hypot(mouseX - catX, mouseY - catY);
+  if (distance < 100) {
+    cat.style.bottom = Math.random() * 100 + "px";
+    cat.style.right = Math.random() * 100 + "px";
+  }
+});
+
+// Teeth falling
+for (let i = 0; i < 15; i++) {
+  let tooth = document.createElement("div");
+  tooth.className = "tooth";
+  tooth.innerHTML = "🦷";
+  tooth.style.left = Math.random() * 100 + "vw";
+  tooth.style.animationDuration = (3 + Math.random() * 3) + "s";
+  tooth.style.animationDelay = Math.random() * 5 + "s";
+  document.body.appendChild(tooth);
+}
+
+// Kid running randomly
+const kid = document.createElement("div");
+kid.className = "kid";
+kid.innerHTML = "🧒";
+document.body.appendChild(kid);
+function moveKid() {
+  kid.style.top = Math.random() * 80 + "vh";
+  kid.style.left = Math.random() * 80 + "vw";
+}
+// Move kid every 1.2 seconds
+setInterval(moveKid, 1200);
+</script>
+
+</body>
+</html>
