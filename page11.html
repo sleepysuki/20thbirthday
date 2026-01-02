@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Birthday Story - Age 9</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  background:linear-gradient(135deg,#e3f2fd,#fce4ec);
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Poppins',sans-serif;
+  text-align:center;
+}
+
+/* Card */
+.card{
+  background:rgba(255,255,255,0.9);
+  padding:40px;
+  border-radius:25px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.15);
+  max-width:420px;
+}
+
+button{
+  margin:10px;
+  padding:12px 30px;
+  border:none;
+  border-radius:25px;
+  background:linear-gradient(135deg,#7e57c2,#42a5f5);
+  color:white;
+  cursor:pointer;
+}
+
+img{
+  width:100%;
+  border-radius:15px;
+  margin:15px 0;
+}
+
+/* Calm floating hearts */
+.heart{
+  position:absolute;
+  font-size:14px;
+  animation:float 8s linear infinite;
+  opacity:0.6;
+}
+
+@keyframes float{
+  0%{transform:translateY(100vh);opacity:0;}
+  50%{opacity:1;}
+  100%{transform:translateY(-10vh);opacity:0;}
+}
+
+/* Energy falling */
+.energy{
+  position:absolute;
+  font-size:24px;
+  animation:fall 5s linear infinite;
+}
+
+@keyframes fall{
+  0%{top:-40px;opacity:0;}
+  50%{opacity:1;}
+  100%{top:100vh;opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Age 9 ✨</h1>
+  <p>Calm mind… strong energy 🌿⚡</p>
+
+  <img src="her-photo-age9.jpg" alt="Age 9 photo">
+
+  <p><strong>[Your Age 9 special message here]</strong></p>
+
+  <button onclick="location.href='page8.html'">Go Back ⬅️</button>
+  <button onclick="location.href='page10.html'">Next ➡️</button>
+</div>
+
+<script>
+// Calm hearts
+const colors=["#bbdefb","#c5cae9","#f8bbd0","#b2dfdb"];
+for(let i=0;i<25;i++){
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤";
+  h.style.left=Math.random()*100+"vw";
+  h.style.color=colors[Math.floor(Math.random()*colors.length)];
+  h.style.animationDuration=(6+Math.random()*4)+"s";
+  document.body.appendChild(h);
+}
+
+// Energy + calm items falling
+const items=["⚡","✨","🌿","💫"];
+for(let i=0;i<20;i++){
+  let e=document.createElement("div");
+  e.className="energy";
+  e.innerHTML=items[Math.floor(Math.random()*items.length)];
+  e.style.left=Math.random()*100+"vw";
+  e.style.animationDuration=(4+Math.random()*3)+"s";
+  e.style.animationDelay=Math.random()*5+"s";
+  document.body.appendChild(e);
+}
+</script>
+
+</body>
+</html>
