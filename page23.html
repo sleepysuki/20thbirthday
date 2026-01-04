@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Heart Puzzle Game 💗</title>
+<style>
+body{
+  margin:0;
+  height:100vh;
+  background:linear-gradient(135deg,#ffe4ec,#ffd1dc);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Poppins',sans-serif;
+  text-align:center;
+  overflow:hidden;
+}
+.card{
+  background:rgba(255,255,255,0.95);
+  padding:45px;
+  border-radius:35px;
+  box-shadow:0 25px 60px rgba(255,105,145,0.3);
+  max-width:600px;
+  position:relative;
+}
+h1{
+  font-size:2em;
+  color:#ff4f91;
+  margin-bottom:20px;
+}
+p{
+  font-size:1.1em;
+  color:#d43f77;
+}
+#puzzle{
+  display:grid;
+  grid-template-columns:repeat(5,60px);
+  grid-gap:10px;
+  justify-content:center;
+  margin:20px 0;
+}
+.heart{
+  font-size:40px;
+  cursor:pointer;
+  user-select:none;
+  transition:transform 0.3s, opacity 0.3s;
+}
+.heart.wrong{
+  color:#aaa;
+}
+.heart.correct{
+  color:#ff1473;
+  transform:scale(1.2);
+}
+@keyframes shake{
+  0%{transform:translate(0,0);}
+  25%{transform:translate(-5px,2px);}
+  50%{transform:translate(5px,-2px);}
+  75%{transform:translate(-5px,2px);}
+  100%{transform:translate(0,0);}
+}
+#nextBtn{
+  display:none;
+  margin-top:20px;
+  padding:12px 28px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(135deg,#ff4f91,#ff77ab);
+  color:white;
+  font-weight:700;
+  cursor:pointer;
+  font-size:1em;
+  box-shadow:0 8px 20px rgba(255,79,145,0.3);
+  transition:transform 0.2s;
+}
+#nextBtn:hover{
+  transform:scale(1.05);
+}
+button.backBtn{
+  margin-top:10px;
+  padding:12px 28px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(135deg,#ff77ab,#ff4f91);
+  color:white;
+  cursor:pointer;
+  box-shadow:0 6px 15px rgba(255,79,145,0.3);
+  transition:transform 0.2s;
+}
+button.backBtn:hover{
+  transform:scale(1.05);
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h1>Heart Puzzle 💗</h1>
+  <p>Click only the <strong>💗</strong> hearts! Wrong hearts will surprise you 😜</p>
+
+  <div id="puzzle"></div>
+
+  <button id="nextBtn" onclick="location.href='page22.html'">
+    I knew you were a genius, click here to see what's in next page! 🎉💗
+  </button>
+
+  <br>
+  <button class="backBtn" onclick="location.href='page20.html'">⬅️ Go Back</button>
+</div>
+
+<script>
+// Puzzle settings
+const puzzle = document.getElementById("puzzle");
+const totalHearts = 20;    // total hearts
+const correctHearts = 7;   // number of 💗 hearts she must click
+let clickedCorrect = 0;
+
+// create hearts array
+let heartsArray = [];
+
+// add correct hearts (💗)
+for(let i=0;i<correctHearts;i++){
+  heartsArray.push("💗");
+}
+// fill the rest with wrong hearts (💖)
+for(let i=correctHearts;i<totalHearts;i++){
+  heartsArray.push("💖");
+}
+
+// shuffle hearts
+heartsArray.sort(()=>0.5-Math.random());
+
+// create elements
+heartsArray.forEach(heart=>{
+  const h = document.createElement("div");
+  h.className="heart";
+  h.innerHTML=heart;
+  puzzle.appendChild(h);
+
+  h.addEventListener("click",function(){
+    if(h.innerHTML==="💗"){
+      if(!h.classList.contains("correct")){
+        h.classList.add("correct");
+        clickedCorrect++;
+        // optional tiny message for loving feeling
+        h.title="Yay! You found a 💗 heart 💖";
+        if(clickedCorrect===correctHearts){
+          document.getElementById("nextBtn").style.display="block";
+        }
+      }
+    }else{
+      // wrong heart clicked
+      h.classList.add("wrong");
+      // vibrate phone if supported
+      if(navigator.vibrate){
+        navigator.vibrate(200);
+      }
+      // shake animation
+      h.style.animation="shake 0.3s";
+      setTimeout(()=>{h.style.animation="";},300);
+    }
+  });
+});
+</script>
+
+</body>
+</html>
